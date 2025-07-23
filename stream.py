@@ -1,6 +1,6 @@
 import streamlit as st
 import base64
-from io import BytesIO
+#from io import BytesIO
 from modelo import processar_pergunta
 
 st.set_page_config(page_title="Chatbot com IA")

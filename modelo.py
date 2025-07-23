@@ -16,7 +16,7 @@ from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.memory import ConversationBufferMemory
 from langchain_community.callbacks import get_openai_callback
-from langchain_core.messages import AIMessage, HumanMessage
+#from langchain_core.messages import AIMessage, HumanMessage
 
 #from dotenv import load_dotenv
 #from pathlib import Path
