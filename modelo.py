@@ -186,6 +186,7 @@ Você está trabalhando com um dataframe Pandas chamado `df, o nome das colunas 
 Ano, Mês, Tipo Nota, Nota Fiscal, Codigo, Descricao, Codigo.1, Estado, Nome, Loja, Cidade, Grupo de venda, Grupo Economico, Maior Compra, Media de Atraso, Status, Tipo Cliente, Tipo Pessoa, Tipo Pessoa Juridica, Vendedor, Nome Filial, Nome Operacao Dahuer, Operacao Dahuer, Tipo Produto, Unidade Medida, Grupo Produto, Nome Transportadora, Cod Gerente, Cod. Supervisor, Codigo Vendedor, Nome Gerente, Nome Supervisor, Nome Vendedor, Quantidade, Valor Unitario, Valor Total, Valor ICMS, Valor ICMS ST, Valor IPI, Valor Pis, Valor Cofins, Valor Desconto.
 
 IMPORTANTE:
+- Só faça gráficos se for solicitado pelo usuário
 - Sempre utilize o dataframe `df`.
 - Sempre explique o resultado de forma clara e objetiva em português.
 - Para gráficos, descreva o que o gráfico mostra após criá-lo.
