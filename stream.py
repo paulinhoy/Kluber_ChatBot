@@ -1,5 +1,6 @@
 import streamlit as st
 import base64
+import re
 #from io import BytesIO
 from modelo import processar_pergunta
 
@@ -30,23 +31,32 @@ if "processing" not in st.session_state:
     st.session_state["processing"] = False
 
 # Função para exibir uma mensagem
-def exibir_mensagem(content):
-    if "GRAFICO_BASE64:" in content:
-        partes = content.split("GRAFICO_BASE64:")
-        texto = partes[0].strip()
-        
-        if texto:
-            st.write(texto)
-        
-        try:
-            base64_data = partes[1].strip()
-            img_data = base64.b64decode(base64_data)
-            st.image(img_data, use_container_width=True)
-        except Exception as e:
-            st.error(f"Erro ao exibir gráfico: {e}")
-    else:
-        st.write(content)
-
+def corrigir_formatacao_moeda(texto):  
+    # Corrige padrões como "R25,56" para "R$ 25,56"  
+    texto = re.sub(r'R(\d+,\d+)', r'R$ \1', texto)  
+    # Corrige padrões como "R 64,63" para "R$ 64,63"  
+    texto = re.sub(r'R (\d+,\d+)', r'R$ \1', texto)  
+    return texto  
+  
+# Modifique a função exibir_mensagem:  
+def exibir_mensagem(content):  
+    if "GRAFICO_BASE64:" in content:  
+        partes = content.split("GRAFICO_BASE64:")  
+        texto = partes[0].strip()  
+          
+        if texto:  
+            texto_corrigido = corrigir_formatacao_moeda(texto)  
+            st.write(texto_corrigido)  
+          
+        try:  
+            base64_data = partes[1].strip()  
+            img_data = base64.b64decode(base64_data)  
+            st.image(img_data, use_container_width=True)  
+        except Exception as e:  
+            st.error(f"Erro ao exibir gráfico: {e}")  
+    else:  
+        content_corrigido = corrigir_formatacao_moeda(content)  
+        st.write(content_corrigido)
 # IMPORTANTE Exibe mensagens só se não tiver processando
 if not st.session_state.processing:
     for msg in st.session_state.messages:
