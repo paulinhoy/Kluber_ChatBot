@@ -80,7 +80,7 @@ if prompt := st.chat_input("Digite sua pergunta...", disabled=st.session_state.p
     
     # Mostrar indicador de processamento
     with st.chat_message("assistant"):
-        with st.spinner("🤔 Analisando os dados..."):
+        with st.spinner("Processando..."):
             # Processar resposta
             resposta = processar_pergunta(prompt)
     
