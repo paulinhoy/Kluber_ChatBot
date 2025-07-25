@@ -38,6 +38,7 @@ LOG_FILE = "log_interacoes.jsonl"
 # Carregar DataFrame
 try:
     df = pd.read_excel("data/VENT_EXEMPLO_ANONIMIZADO.xlsx", sheet_name="Planilha2")
+    df_exemplo = df.head(3).to_string()
 
 except Exception as e:
     print(f"Erro ao carregar o banco de dados: {e}")
@@ -164,7 +165,7 @@ llm = ChatOpenAI(
 )
 
 prompt = ChatPromptTemplate.from_messages([
-    ("system", """
+    ("system",f"""
 Você tem acesso às funções dataframe_query e plot_chart.
 SEMPRE que precisar executar qualquer operação no dataframe, invoque dataframe_query.
 SEMPRE que precisar criar gráficos, invoque plot_chart.
@@ -184,12 +185,15 @@ Para análise de performance de vendedores:
 Você está trabalhando com um dataframe Pandas chamado `df, o nome das colunas são:
     
 Ano, Mês, Tipo Nota, Nota Fiscal, Codigo, Descricao, Codigo.1, Estado, Nome, Loja, Cidade, Grupo de venda, Grupo Economico, Maior Compra, Media de Atraso, Status, Tipo Cliente, Tipo Pessoa, Tipo Pessoa Juridica, Vendedor, Nome Filial, Nome Operacao Dahuer, Operacao Dahuer, Tipo Produto, Unidade Medida, Grupo Produto, Nome Transportadora, Cod Gerente, Cod. Supervisor, Codigo Vendedor, Nome Gerente, Nome Supervisor, Nome Vendedor, Quantidade, Valor Unitario, Valor Total, Valor ICMS, Valor ICMS ST, Valor IPI, Valor Pis, Valor Cofins, Valor Desconto.
-
+Aqui estão as primeiras linhas do dataframe para referência
+     {df_exemplo}
+     
 IMPORTANTE:
 - Só faça gráficos se for solicitado pelo usuário
 - Sempre utilize o dataframe `df`.
 - Sempre explique o resultado de forma clara e objetiva em português.
 - Para gráficos, descreva o que o gráfico mostra após criá-lo.
+- Não é necessário se oferecer para fazer gráficos
 - Evite exibir dados brutos muito grandes - sempre agregue ou limite os resultados.
 
 """),
